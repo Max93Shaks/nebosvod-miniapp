@@ -48,7 +48,8 @@
                     Предоставляем гарантию качества товаров и монтажных работ.
                 </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
-                <button class="btn" onclick="showScreen('screen-services')">🛠 Услуги</button>
+                <!-- Главное меню: кнопка Услуги ведет на бота -->
+                <button class="btn" onclick="window.open('https://max.ru/se15014206_1_bot?start=services', '_blank')">🛠 Услуги</button>
                 <button class="btn" onclick="alert('Информация о нас')">ℹ️ О нас</button>
                 <button class="btn" onclick="alert('Контакты')">📞 Прямая связь</button>
             </div>
@@ -89,9 +90,6 @@
             <div id="screen-services" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Услуги</h2>
                 <p style="margin-bottom: 15px; color: #666;">Выберите действие:</p>
-                
-                <button class="btn" onclick="showScreen('screen-measure')">📏 Записаться на замер</button>
-                <button class="btn" onclick="alert('Здесь будет расчёт монтажа (в разработке)')">🧮 Рассчитать монтаж</button>
                 
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
