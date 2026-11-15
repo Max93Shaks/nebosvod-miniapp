@@ -5,67 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Небосвод</title>
     <style>
+        /* Стили */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 20px;
+            background-color: #f4f7f9;
+            color: #333;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
             min-height: 100vh;
-            color: #333;
         }
-        .container {
-            max-width: 400px;
+        .app-container {
             width: 100%;
+            max-width: 480px;
+            background: #fff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 20px;
             text-align: center;
+            font-size: 20px;
+            font-weight: bold;
         }
-        h1 {
-            color: #1a1a2e;
-            margin-bottom: 10px;
+        .content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        p {
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .button {
+        .btn {
             display: block;
+            width: 100%;
+            padding: 16px;
+            background-color: #f0f4f8;
+            color: #333;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn:hover { background-color: #e2e8f0; }
+        .btn.primary {
             background-color: #4a86ff;
             color: white;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-            border: none;
-            width: 100%;
-            cursor: pointer;
+            justify-content: center;
         }
-        .button:hover {
-            background-color: #3a6fd8;
+        .btn.primary:hover { background-color: #3a6fd8; }
+        .btn.back {
+            background-color: transparent;
+            color: #4a86ff;
+            justify-content: center;
+            margin-top: auto;
         }
-        .button.secondary {
-            background-color: #e2e8f0;
-            color: #333;
-        }
-        .button.secondary:hover {
-            background-color: #cbd5e0;
-        }
+        .btn.back:hover { background-color: #f0f4f8; }
+        .screen { display: none; }
+        .screen.active { display: flex; flex-direction: column; flex: 1; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Небосвод</h1>
-        <p>Выберите интересующий вас раздел</p>
+    <div class="app-container">
+        <div class="header">Небосвод</div>
 
-        <button class="button" onclick="alert('Здесь будет каталог товаров')">🛒 Товары</button>
-        <button class="button" onclick="alert('Здесь будут услуги')">🛠 Услуги</button>
-        <button class="button secondary" onclick="alert('Информация о нас')">ℹ️ О нас</button>
-        <button class="button secondary" onclick="alert('Контакты')">📞 Прямая связь</button>
+        <div class="content">
+            <!-- ЭКРАН: ГЛАВНОЕ МЕНЮ -->
+            <div id="screen-main" class="screen active">
+                <p style="margin-bottom: 20px; color: #666;">Добро пожаловать! Выберите интересующий вас раздел.</p>
+                <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
+                <button class="btn" onclick="alert('Здесь будут услуги')">🛠 Услуги</button>
+                <button class="btn" onclick="alert('Информация о нас')">ℹ️ О нас</button>
+                <button class="btn" onclick="alert('Контакты')">📞 Прямая связь</button>
+            </div>
+
+            <!-- ЭКРАН: ТОВАРЫ -->
+            <div id="screen-products" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Раздел «Товары»</h2>
+                <p style="margin-bottom: 20px; color: #666;">Выберите категорию:</p>
+                <button class="btn" onclick="showScreen('screen-doors')">🚪 Двери</button>
+                <button class="btn" onclick="alert('Окна (в разработке)')">🪟 Окна</button>
+                <button class="btn" onclick="alert('Потолки (в разработке)')">🪞 Потолки</button>
+                <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
+            </div>
+
+            <!-- ЭКРАН: ДВЕРИ -->
+            <div id="screen-doors" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Раздел «Двери»</h2>
+                <p style="margin-bottom: 20px; color: #666;">Выберите подкатегорию:</p>
+                <button class="btn" onclick="alert('Входные двери (в разработке)')">🚪 Входные двери</button>
+                <button class="btn" onclick="alert('Межкомнатные двери (в разработке)')">🚪 Межкомнатные двери</button>
+                <button class="btn back" onclick="showScreen('screen-products')">⬅️ Назад к товарам</button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Функция для переключения экранов
+        function showScreen(screenId) {
+            // Скрываем все экраны
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(s => s.classList.remove('active'));
+            
+            // Показываем нужный
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
