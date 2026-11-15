@@ -4,152 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Небосвод</title>
+    <!-- ЭТА СТРОКА ПОДКЛЮЧАЕТ MAX BRIDGE -->
+    <script src="https://st.max.ru/js/max-web-app.js"></script>
     <style>
-        /* Стили */
+        /* ... (все ваши стили остаются без изменений) ... */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f4f7f9;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            background: #fff;
-            min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
-        /* Шапка с картинкой */
-        .header-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 3px solid #4a86ff;
-        }
-        .header-text {
-            padding: 15px 20px;
-            background: #fff;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: #1a1a2e;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .content {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background-color: #f0f4f8;
-            color: #333;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            text-align: left;
-            cursor: pointer;
-            transition: background 0.2s;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f4f7f9; color: #333; display: flex; justify-content: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .header-image { width: 100%; height: 180px; object-fit: cover; border-bottom: 3px solid #4a86ff; }
+        .header-text { padding: 15px 20px; background: #fff; text-align: center; font-size: 18px; font-weight: bold; color: #1a1a2e; border-bottom: 1px solid #e2e8f0; }
+        .content { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .btn { display: block; width: 100%; padding: 16px; background-color: #f0f4f8; color: #333; border: none; border-radius: 12px; font-size: 16px; text-align: left; cursor: pointer; transition: background 0.2s; font-weight: 500; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .btn:hover { background-color: #e2e8f0; }
-        .btn.primary {
-            background-color: #4a86ff;
-            color: white;
-            justify-content: center;
-        }
+        .btn.primary { background-color: #4a86ff; color: white; justify-content: center; }
         .btn.primary:hover { background-color: #3a6fd8; }
-        .btn.back {
-            background-color: transparent;
-            color: #4a86ff;
-            justify-content: center;
-            margin-top: auto;
-            padding-top: 20px;
-        }
+        .btn.back { background-color: transparent; color: #4a86ff; justify-content: center; margin-top: auto; padding-top: 20px; }
         .btn.back:hover { background-color: #f0f4f8; }
         .screen { display: none; }
         .screen.active { display: flex; flex-direction: column; flex: 1; }
-        
-        /* Стили для карточек товаров (Авито) */
-        .product-card {
-            display: flex;
-            background: #f8fafc;
-            border-radius: 12px;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid #e2e8f0;
-            transition: transform 0.2s;
-        }
-        .product-card:hover {
-            transform: translateY(-2px);
-            border-color: #4a86ff;
-        }
-        .product-image {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-        .product-info {
-            padding: 10px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .product-title {
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        .product-price {
-            color: #4a86ff;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* Стили для формы */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #555;
-            font-weight: 500;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e0;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: inherit;
-        }
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #4a86ff;
-            box-shadow: 0 0 0 3px rgba(74, 134, 255, 0.1);
-        }
+        .product-card { display: flex; background: #f8fafc; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-2px); border-color: #4a86ff; }
+        .product-image { width: 100px; height: 100px; object-fit: cover; }
+        .product-info { padding: 10px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .product-title { font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+        .product-price { color: #4a86ff; font-weight: bold; font-size: 16px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #555; font-weight: 500; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 16px; font-family: inherit; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #4a86ff; box-shadow: 0 0 0 3px rgba(74, 134, 255, 0.1); }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- ССЫЛКА НА ВАШУ КАРТИНКУ -->
+    <!-- Добавили id="app" для Bridge -->
+    <div class="app-container" id="app">
         <img src="https://raw.githubusercontent.com/Max93Shaks/nebosvod-miniapp/main/welcome.jpg" alt="Небосвод" class="header-image">
         <div class="header-text">Добро пожаловать в Небосвод!</div>
 
@@ -158,7 +45,7 @@
             <div id="screen-main" class="screen active">
                 <p style="margin-bottom: 10px; color: #666; text-align: center;">
                     Мы работаем на рынке товаров и услуг уже более 14 лет!<br>
-                    Предоставляем гарантию качества товаров и строительных работ.
+                    Предоставляем гарантию качества товаров и монтажных работ.
                 </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
                 <button class="btn" onclick="showScreen('screen-services')">🛠 Услуги</button>
@@ -179,21 +66,19 @@
             <div id="screen-doors" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Двери</h2>
                 
-                <!-- ВАША КАРТОЧКА 1 -->
                 <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/vhodnye_dveri_v_kvartiru_8136342838" target="_blank" class="product-card">
                     <img src="https://b00.img.avito.st/image/1/1.QNIq6ba47DscXm42JpwukTxJ7j2USG4tHEXuOZpA5DGc.qH-xerVqDsvkP7rJ4gefmAlcjZntwcuWyYaBAi2z9b0?cqp=2.YN7dHnrK-mhyvtTBpyubvaFoUVdTM3W7BFy5YaeXzZ_Q2glMrBb_s4irqaJhHlfJPgeDGUqVXQ==" alt="Дверь 1" class="product-image">
                     <div class="product-info">
                         <div class="product-title">Входная дверь Alpine</div>
-                        <div class="product-price">20 030 ₽</div>
+                        <div class="product-price">23 000 ₽</div>
                     </div>
                 </a>
 
-                <!-- ВАША КАРТОЧКА 2 -->
                 <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/mezhkomnatnye_dveri_8136263055" target="_blank" class="product-card">
                     <img src="https://60.img.avito.st/image/1/1.gBIa0ra4LPssZa72FpjpXQxyLv2kc67tLH4u-ap7JPGs.sBHxE5D0H06lOrixUUiIJtqoybFsUPvNPEw_amPF_zc" alt="Дверь 2" class="product-image">
                     <div class="product-info">
                         <div class="product-title">Межкомнатная дверь Loft</div>
-                        <div class="product-price">7 150 ₽</div>
+                        <div class="product-price">7 000 ₽</div>
                     </div>
                 </a>
 
@@ -214,7 +99,7 @@
             <!-- ЭКРАН: ЗАПИСЬ НА ЗАМЕР (ФОРМА) -->
             <div id="screen-measure" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Запись на замер</h2>
-                <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Оставьте свои данные, и мы свяжемся с вами для согласования времени.</p>
+                <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Оставьте свои данные, и мы свяжемся с вами.</p>
                 
                 <form id="measure-form" onsubmit="submitMeasure(event)">
                     <div class="form-group">
@@ -228,9 +113,9 @@
                     <div class="form-group">
                         <label>Что нужно замерить?</label>
                         <select id="service-type">
-                            <option value="doors">Двери</option>
-                            <option value="windows">Окна</option>
-                            <option value="ceilings">Потолки</option>
+                            <option value="Двери">Двери</option>
+                            <option value="Окна">Окна</option>
+                            <option value="Потолки">Потолки</option>
                         </select>
                     </div>
                     <button type="submit" class="btn primary" style="margin-top: 10px;">Отправить заявку</button>
@@ -249,17 +134,31 @@
             window.scrollTo(0, 0);
         }
 
+        // ОТПРАВКА ЗАЯВКИ В БОТ ЧЕРЕЗ MAX BRIDGE
         function submitMeasure(event) {
             event.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const type = document.getElementById('service-type').value;
             
-            // Пока просто выводим данные, чтобы проверить работу
-            alert(`Заявка отправлена!\nИмя: ${name}\nТелефон: ${phone}\nУслуга: ${type}`);
-            
-            // После отправки возвращаемся в меню
-            showScreen('screen-main');
+            // Формируем текст команды для бота
+            const messageText = `Заявка на замер: Имя - ${name}, Телефон - ${phone}, Услуга - ${type}`;
+
+            try {
+                // Отправляем текст боту
+                window.WebApp.sendData(messageText);
+                
+                // Показываем пользователю, что всё ок
+                alert(`Заявка отправлена!\nМы свяжемся с вами по номеру ${phone}`);
+                
+                // Очищаем форму и возвращаемся в меню
+                document.getElementById('measure-form').reset();
+                showScreen('screen-main');
+            } catch (error) {
+                // Если MAX Bridge не сработал (например, открыли в браузере, а не в MAX)
+                console.error(error);
+                alert("Ошибка отправки. Пожалуйста, убедитесь, что вы находитесь в приложении MAX.");
+            }
         }
     </script>
 </body>
