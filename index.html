@@ -24,13 +24,21 @@
             display: flex;
             flex-direction: column;
         }
-        .header {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            padding: 20px;
+        /* Шапка с картинкой */
+        .header-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 3px solid #4a86ff;
+        }
+        .header-text {
+            padding: 15px 20px;
+            background: #fff;
             text-align: center;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
+            color: #1a1a2e;
+            border-bottom: 1px solid #e2e8f0;
         }
         .content {
             padding: 20px;
@@ -55,6 +63,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
         }
         .btn:hover { background-color: #e2e8f0; }
         .btn.primary {
@@ -72,17 +81,59 @@
         .btn.back:hover { background-color: #f0f4f8; }
         .screen { display: none; }
         .screen.active { display: flex; flex-direction: column; flex: 1; }
-        .hidden { display: none !important; }
+        
+        /* Стили для карточек товаров (Авито) */
+        .product-card {
+            display: flex;
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-2px);
+            border-color: #4a86ff;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .product-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            color: #4a86ff;
+            font-weight: bold;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <div class="header">Небосвод</div>
+        <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШУ КАРТИНКУ -->
+        <img src="https://raw.githubusercontent.com/ВАШ_ЛОГИН/nebosvod-miniapp/main/welcome.jpg" alt="Небосвод" class="header-image">
+        <div class="header-text">Добро пожаловать в Небосвод!</div>
 
         <div class="content">
             <!-- ЭКРАН: ГЛАВНОЕ МЕНЮ -->
             <div id="screen-main" class="screen active">
-                <p style="margin-bottom: 20px; color: #666;">Добро пожаловать! Выберите интересующий вас раздел.</p>
+                <p style="margin-bottom: 10px; color: #666; text-align: center;">
+                    Мы работаем на рынке товаров и услуг уже 14 лет!<br>
+                    Предоставляем гарантию качества.
+                </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
                 <button class="btn" onclick="alert('Здесь будут услуги')">🛠 Услуги</button>
                 <button class="btn" onclick="alert('Информация о нас')">ℹ️ О нас</button>
@@ -92,32 +143,43 @@
             <!-- ЭКРАН: ТОВАРЫ -->
             <div id="screen-products" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Раздел «Товары»</h2>
-                <p style="margin-bottom: 20px; color: #666;">Выберите категорию:</p>
                 <button class="btn" onclick="showScreen('screen-doors')">🚪 Двери</button>
                 <button class="btn" onclick="alert('Окна (в разработке)')">🪟 Окна</button>
                 <button class="btn" onclick="alert('Потолки (в разработке)')">🪞 Потолки</button>
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
-            <!-- ЭКРАН: ДВЕРИ -->
+            <!-- ЭКРАН: ДВЕРИ (С товарами) -->
             <div id="screen-doors" class="screen">
-                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Раздел «Двери»</h2>
-                <p style="margin-bottom: 20px; color: #666;">Выберите подкатегорию:</p>
-                <button class="btn" onclick="alert('Входные двери (в разработке)')">🚪 Входные двери</button>
-                <button class="btn" onclick="alert('Межкомнатные двери (в разработке)')">🚪 Межкомнатные двери</button>
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Двери</h2>
+                
+                <!-- Карточка товара 1 (Замените ссылки на свои) -->
+                <a href="https://www.avito.ru/ваша_ссылка_на_товар" target="_blank" class="product-card">
+                    <img src="https://80.img.avito.st/image/1/1.1N654Wq_..." alt="Дверь 1" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Входная дверь Alpine</div>
+                        <div class="product-price">45 000 ₽</div>
+                    </div>
+                </a>
+
+                <!-- Карточка товара 2 -->
+                <a href="https://www.avito.ru/ваша_ссылка_на_товар" target="_blank" class="product-card">
+                    <img src="https://80.img.avito.st/image/1/1.1N654Wq_..." alt="Дверь 2" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Межкомнатная дверь Loft</div>
+                        <div class="product-price">18 000 ₽</div>
+                    </div>
+                </a>
+
                 <button class="btn back" onclick="showScreen('screen-products')">⬅️ Назад к товарам</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Функция для переключения экранов
         function showScreen(screenId) {
-            // Скрываем все экраны
             const screens = document.querySelectorAll('.screen');
             screens.forEach(s => s.classList.remove('active'));
-            
-            // Показываем нужный
             document.getElementById(screenId).classList.add('active');
         }
     </script>
