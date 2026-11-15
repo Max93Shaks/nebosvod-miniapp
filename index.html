@@ -77,6 +77,7 @@
             color: #4a86ff;
             justify-content: center;
             margin-top: auto;
+            padding-top: 20px;
         }
         .btn.back:hover { background-color: #f0f4f8; }
         .screen { display: none; }
@@ -119,23 +120,48 @@
             font-weight: bold;
             font-size: 16px;
         }
+
+        /* Стили для формы */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4a86ff;
+            box-shadow: 0 0 0 3px rgba(74, 134, 255, 0.1);
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШУ КАРТИНКУ -->
-        <img src="https://raw.githubusercontent.com/Max93Shaks/nebosvod-miniapp/main/welcome.jpg" alt="Небосвод" class="header-image">
+        <!-- ССЫЛКА НА ВАШУ КАРТИНКУ -->
+        <img src="https://raw.githubusercontent.com/ВАШ_ЛОГИН/nebosvod-miniapp/main/welcome.jpg" alt="Небосвод" class="header-image">
         <div class="header-text">Добро пожаловать в Небосвод!</div>
 
         <div class="content">
             <!-- ЭКРАН: ГЛАВНОЕ МЕНЮ -->
             <div id="screen-main" class="screen active">
                 <p style="margin-bottom: 10px; color: #666; text-align: center;">
-                    Мы работаем на рынке товаров и услуг уже 14 лет!<br>
-                    Предоставляем гарантию качества.
+                    Мы работаем на рынке товаров и услуг уже более 14 лет!<br>
+                    Предоставляем гарантию качества товаров и строительных работ.
                 </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
-                <button class="btn" onclick="alert('Здесь будут услуги')">🛠 Услуги</button>
+                <button class="btn" onclick="showScreen('screen-services')">🛠 Услуги</button>
                 <button class="btn" onclick="alert('Информация о нас')">ℹ️ О нас</button>
                 <button class="btn" onclick="alert('Контакты')">📞 Прямая связь</button>
             </div>
@@ -149,29 +175,68 @@
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
-            <!-- ЭКРАН: ДВЕРИ (С товарами) -->
+            <!-- ЭКРАН: ДВЕРИ (ВАШИ ССЫЛКИ НА АВИТО) -->
             <div id="screen-doors" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Двери</h2>
                 
-                <!-- Карточка товара 1 (Замените ссылки на свои) -->
-                <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/vhodnye_dveri_v_kvartiru_8136342838" target="_blank" class="product-card">
-                    <img src="https://b00.img.avito.st/image/1/1.QNIq6ba47DscXm42JpwukTxJ7j2USG4tHEXuOZpA5DGc.qH-xerVqDsvkP7rJ4gefmAlcjZntwcuWyYaBAi2z9b0?cqp=2.YN7dHnrK-mhyvtTBpyubvaFoUVdTM3W7BFy5YaeXzZ_Q2glMrBb_s4irqaJhHlfJPgeDGUqVXQ==" alt="Дверь 1" class="product-image">
+                <!-- ВАША КАРТОЧКА 1 -->
+                <a href="https://www.avito.ru/ваша_ссылка_1" target="_blank" class="product-card">
+                    <img src="https://80.img.avito.st/image/1/1.1N654Wq_...ваша_картинка_1" alt="Дверь 1" class="product-image">
                     <div class="product-info">
                         <div class="product-title">Входная дверь Alpine</div>
-                        <div class="product-price">20 300 ₽</div>
+                        <div class="product-price">45 000 ₽</div>
                     </div>
                 </a>
 
-                <!-- Карточка товара 2 -->
-                <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/mezhkomnatnye_dveri_8136263055" target="_blank" class="product-card">
-                    <img src="https://60.img.avito.st/image/1/1.gBIa0ra4LPssZa72FpjpXQxyLv2kc67tLH4u-ap7JPGs.sBHxE5D0H06lOrixUUiIJtqoybFsUPvNPEw_amPF_zc" alt="Дверь 2" class="product-image">
+                <!-- ВАША КАРТОЧКА 2 -->
+                <a href="https://www.avito.ru/ваша_ссылка_2" target="_blank" class="product-card">
+                    <img src="https://80.img.avito.st/image/1/1.1N654Wq_...ваша_картинка_2" alt="Дверь 2" class="product-image">
                     <div class="product-info">
                         <div class="product-title">Межкомнатная дверь Loft</div>
-                        <div class="product-price">7 200 ₽</div>
+                        <div class="product-price">18 000 ₽</div>
                     </div>
                 </a>
 
                 <button class="btn back" onclick="showScreen('screen-products')">⬅️ Назад к товарам</button>
+            </div>
+
+            <!-- ЭКРАН: УСЛУГИ -->
+            <div id="screen-services" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Услуги</h2>
+                <p style="margin-bottom: 15px; color: #666;">Выберите действие:</p>
+                
+                <button class="btn" onclick="showScreen('screen-measure')">📏 Записаться на замер</button>
+                <button class="btn" onclick="alert('Здесь будет расчёт монтажа (в разработке)')">🧮 Рассчитать монтаж</button>
+                
+                <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
+            </div>
+
+            <!-- ЭКРАН: ЗАПИСЬ НА ЗАМЕР (ФОРМА) -->
+            <div id="screen-measure" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Запись на замер</h2>
+                <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Оставьте свои данные, и мы свяжемся с вами для согласования времени.</p>
+                
+                <form id="measure-form" onsubmit="submitMeasure(event)">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" id="name" required placeholder="Иван">
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" id="phone" required placeholder="+7 999 123-45-67">
+                    </div>
+                    <div class="form-group">
+                        <label>Что нужно замерить?</label>
+                        <select id="service-type">
+                            <option value="doors">Двери</option>
+                            <option value="windows">Окна</option>
+                            <option value="ceilings">Потолки</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn primary" style="margin-top: 10px;">Отправить заявку</button>
+                </form>
+
+                <button class="btn back" onclick="showScreen('screen-services')">⬅️ Назад к услугам</button>
             </div>
         </div>
     </div>
@@ -181,6 +246,20 @@
             const screens = document.querySelectorAll('.screen');
             screens.forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function submitMeasure(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const type = document.getElementById('service-type').value;
+            
+            // Пока просто выводим данные, чтобы проверить работу
+            alert(`Заявка отправлена!\nИмя: ${name}\nТелефон: ${phone}\nУслуга: ${type}`);
+            
+            // После отправки возвращаемся в меню
+            showScreen('screen-main');
         }
     </script>
 </body>
