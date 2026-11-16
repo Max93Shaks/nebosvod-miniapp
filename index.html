@@ -4,34 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Небосвод</title>
-    <!-- ЭТА СТРОКА ПОДКЛЮЧАЕТ MAX BRIDGE -->
     <script src="https://st.max.ru/js/max-web-app.js"></script>
     <style>
-        /* ... (все ваши стили остаются без изменений) ... */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f4f7f9; color: #333; display: flex; justify-content: center; min-height: 100vh; }
         .app-container { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
         .header-image { width: 100%; height: 180px; object-fit: cover; border-bottom: 3px solid #4a86ff; }
         .header-text { padding: 15px 20px; background: #fff; text-align: center; font-size: 18px; font-weight: bold; color: #1a1a2e; border-bottom: 1px solid #e2e8f0; }
         .content { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        
         .btn { display: block; width: 100%; padding: 16px; background-color: #f0f4f8; color: #333; border: none; border-radius: 12px; font-size: 16px; text-align: left; cursor: pointer; transition: background 0.2s; font-weight: 500; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .btn:hover { background-color: #e2e8f0; }
         .btn.primary { background-color: #4a86ff; color: white; justify-content: center; }
         .btn.primary:hover { background-color: #3a6fd8; }
         .btn.back { background-color: transparent; color: #4a86ff; justify-content: center; margin-top: auto; padding-top: 20px; }
         .btn.back:hover { background-color: #f0f4f8; }
+        
         .screen { display: none; }
         .screen.active { display: flex; flex-direction: column; flex: 1; }
+        
         .product-card { display: flex; background: #f8fafc; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; border: 1px solid #e2e8f0; transition: transform 0.2s; }
         .product-card:hover { transform: translateY(-2px); border-color: #4a86ff; }
         .product-image { width: 100px; height: 100px; object-fit: cover; }
         .product-info { padding: 10px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .product-title { font-weight: bold; font-size: 14px; margin-bottom: 5px; }
         .product-price { color: #4a86ff; font-weight: bold; font-size: 16px; }
+        
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #555; font-weight: 500; }
         .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 16px; font-family: inherit; }
         .form-group input:focus, .form-group select:focus { outline: none; border-color: #4a86ff; box-shadow: 0 0 0 3px rgba(74, 134, 255, 0.1); }
+        
         .info-text { font-size: 15px; line-height: 1.5; color: #444; margin-bottom: 10px; }
         .info-text strong { color: #1a1a2e; }
     </style>
@@ -42,19 +45,34 @@
         <div class="header-text">Добро пожаловать в Небосвод!</div>
 
         <div class="content">
-            <!-- ЭКРАН: ГЛАВНОЕ МЕНЮ -->
+            <!-- ГЛАВНОЕ МЕНЮ -->
             <div id="screen-main" class="screen active">
                 <p style="margin-bottom: 10px; color: #666; text-align: center;">
                     Мы работаем на рынке товаров и услуг уже более 14 лет!<br>
                     Предоставляем гарантию качества товаров и монтажных работ.
                 </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
-                <button class="btn" onclick="window.open('https://max.ru/se15014206_1_bot?start=services', '_blank')">🛠 Услуги</button>
+                <!-- Кнопка Услуги теперь открывает экран услуг внутри приложения -->
+                <button class="btn" onclick="showScreen('screen-services')">🛠 Услуги</button>
                 <button class="btn" onclick="showScreen('screen-about')">ℹ️ О нас</button>
                 <button class="btn" onclick="showScreen('screen-contacts')">📞 Прямая связь</button>
             </div>
 
-            <!-- ЭКРАН: ТОВАРЫ -->
+            <!-- ЭКРАН УСЛУГ (2 КНОПКИ) -->
+            <div id="screen-services" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">🛠 Услуги</h2>
+                <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Выберите необходимое действие:</p>
+                
+                <!-- Кнопка 1: Расчет монтажа -->
+                <button class="btn" onclick="showScreen('screen-calc')">🧮 Рассчитать монтаж</button>
+                
+                <!-- Кнопка 2: Запись на замер -->
+                <button class="btn" onclick="showScreen('screen-measure')">📏 Записаться на замер</button>
+                
+                <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
+            </div>
+
+            <!-- ТОВАРЫ -->
             <div id="screen-products" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Раздел «Товары»</h2>
                 <button class="btn" onclick="showScreen('screen-doors')">🚪 Двери</button>
@@ -63,7 +81,7 @@
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
-            <!-- ЭКРАН: ДВЕРИ -->
+            <!-- ДВЕРИ -->
             <div id="screen-doors" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Двери</h2>
                 <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/vhodnye_dveri_v_kvartiru_8136342838" target="_blank" class="product-card">
@@ -83,7 +101,7 @@
                 <button class="btn back" onclick="showScreen('screen-products')">⬅️ Назад к товарам</button>
             </div>
 
-            <!-- НОВЫЙ ЭКРАН: О НАС -->
+            <!-- О НАС -->
             <div id="screen-about" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">ℹ️ О компании «Небосвод»</h2>
                 <p class="info-text">Мы работаем на рынке товаров и услуг уже <strong>14 лет</strong>. Предоставляем гарантию качества наших товаров и монтажных работ.</p>
@@ -93,11 +111,10 @@
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
-            <!-- НОВЫЙ ЭКРАН: ПРЯМАЯ СВЯЗЬ -->
+            <!-- ПРЯМАЯ СВЯЗЬ -->
             <div id="screen-contacts" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">📞 Прямая связь</h2>
                 <p class="info-text" style="margin-bottom: 15px;">Выберите удобный магазин для связи:</p>
-                <!-- Замените URL на реальные ссылки MAX -->
                 <a href="https://max.ru/..." target="_blank" class="btn">📍 Магазин на ул. Физкультурная 20А</a>
                 <a href="https://max.ru/..." target="_blank" class="btn">📍 Магазин на ул. Н. Островского 111 к12</a>
                 <div style="margin-top: 20px; background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
@@ -108,26 +125,56 @@
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
-            <!-- ЭКРАН: ЗАПИСЬ НА ЗАМЕР (ФОРМА) -->
+            <!-- ФОРМА: ЗАМЕР -->
             <div id="screen-measure" class="screen">
-                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Запись на замер</h2>
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">📏 Запись на замер</h2>
                 <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Оставьте свои данные, и мы свяжемся с вами.</p>
-                <form id="measure-form" onsubmit="submitMeasure(event)">
+                <form id="measure-form" onsubmit="submitForm(event, 'measure')">
                     <div class="form-group">
                         <label>Ваше имя</label>
-                        <input type="text" id="name" required placeholder="Иван">
+                        <input type="text" id="m-name" required placeholder="Иван">
                     </div>
                     <div class="form-group">
                         <label>Телефон</label>
-                        <input type="tel" id="phone" required placeholder="+7 999 123-45-67">
+                        <input type="tel" id="m-phone" required placeholder="+7 999 123-45-67">
                     </div>
                     <div class="form-group">
                         <label>Что нужно замерить?</label>
-                        <select id="service-type">
+                        <select id="m-type">
                             <option value="Двери">Двери</option>
                             <option value="Окна">Окна</option>
                             <option value="Потолки">Потолки</option>
                         </select>
+                    </div>
+                    <button type="submit" class="btn primary" style="margin-top: 10px;">Отправить заявку</button>
+                </form>
+                <button class="btn back" onclick="showScreen('screen-services')">⬅️ Назад к услугам</button>
+            </div>
+
+            <!-- ФОРМА: РАСЧЕТ МОНТАЖА -->
+            <div id="screen-calc" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">🧮 Расчет монтажа</h2>
+                <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Оставьте заявку на предварительный расчет.</p>
+                <form id="calc-form" onsubmit="submitForm(event, 'calc')">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" id="c-name" required placeholder="Иван">
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" id="c-phone" required placeholder="+7 999 123-45-67">
+                    </div>
+                    <div class="form-group">
+                        <label>Что нужно рассчитать?</label>
+                        <select id="c-type">
+                            <option value="Двери">Двери</option>
+                            <option value="Окна">Окна</option>
+                            <option value="Потолки">Потолки</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Комментарий (площадь, количество)</label>
+                        <input type="text" id="c-comment" placeholder="2 двери, около 10 м²">
                     </div>
                     <button type="submit" class="btn primary" style="margin-top: 10px;">Отправить заявку</button>
                 </form>
@@ -144,28 +191,35 @@
             window.scrollTo(0, 0);
         }
 
-        function submitMeasure(event) {
+        // Универсальная функция для отправки обеих форм
+        function submitForm(event, formType) {
             event.preventDefault();
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const type = document.getElementById('service-type').value;
             
-            // ВАЖНО: Добавляем префикс, чтобы бот понял, что это заявка
-            const messageText = `ЗАЯВКА_ИЗ_МИНИ_ПРИЛОЖЕНИЯ: Имя - ${name}, Телефон - ${phone}, Услуга - ${type}`;
+            let messageText = "";
+
+            if (formType === 'measure') {
+                const name = document.getElementById('m-name').value;
+                const phone = document.getElementById('m-phone').value;
+                const type = document.getElementById('m-type').value;
+                messageText = `ЗАЯВКА_ИЗ_МИНИ_ПРИЛОЖЕНИЯ: ЗАМЕР | Имя - ${name}, Телефон - ${phone}, Услуга - ${type}`;
+                document.getElementById('measure-form').reset();
+            } else if (formType === 'calc') {
+                const name = document.getElementById('c-name').value;
+                const phone = document.getElementById('c-phone').value;
+                const type = document.getElementById('c-type').value;
+                const comment = document.getElementById('c-comment').value || "нет";
+                messageText = `ЗАЯВКА_ИЗ_МИНИ_ПРИЛОЖЕНИЯ: РАСЧЕТ | Имя - ${name}, Телефон - ${phone}, Услуга - ${type}, Детали - ${comment}`;
+                document.getElementById('calc-form').reset();
+            }
 
             try {
-                // Отправляем текст боту
+                // Отправляем в бот
                 window.WebApp.sendData(messageText);
-                
-                // Показываем пользователю, что всё ок
-                alert(`Заявка отправлена!\nМы свяжемся с вами по номеру ${phone}`);
-                
-                // Очищаем форму и возвращаемся в меню
-                document.getElementById('measure-form').reset();
+                alert(`Заявка отправлена!\nМы свяжемся с вами в ближайшее время.`);
                 showScreen('screen-main');
             } catch (error) {
                 console.error(error);
-                alert("Ошибка отправки. Пожалуйста, убедитесь, что вы находитесь в приложении MAX.");
+                alert("Ошибка отправки. Убедитесь, что вы открыли приложение через MAX.");
             }
         }
     </script>
