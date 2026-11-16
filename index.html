@@ -32,10 +32,11 @@
         .form-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #555; font-weight: 500; }
         .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 16px; font-family: inherit; }
         .form-group input:focus, .form-group select:focus { outline: none; border-color: #4a86ff; box-shadow: 0 0 0 3px rgba(74, 134, 255, 0.1); }
+        .info-text { font-size: 15px; line-height: 1.5; color: #444; margin-bottom: 10px; }
+        .info-text strong { color: #1a1a2e; }
     </style>
 </head>
 <body>
-    <!-- Добавили id="app" для Bridge -->
     <div class="app-container" id="app">
         <img src="https://raw.githubusercontent.com/Max93Shaks/nebosvod-miniapp/main/welcome.jpg" alt="Небосвод" class="header-image">
         <div class="header-text">Добро пожаловать в Небосвод!</div>
@@ -48,10 +49,9 @@
                     Предоставляем гарантию качества товаров и монтажных работ.
                 </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
-                <!-- Главное меню: кнопка Услуги ведет на бота -->
                 <button class="btn" onclick="window.open('https://max.ru/se15014206_1_bot?start=services', '_blank')">🛠 Услуги</button>
-                <button class="btn" onclick="alert('Информация о нас')">ℹ️ О нас</button>
-                <button class="btn" onclick="alert('Контакты')">📞 Прямая связь</button>
+                <button class="btn" onclick="showScreen('screen-about')">ℹ️ О нас</button>
+                <button class="btn" onclick="showScreen('screen-contacts')">📞 Прямая связь</button>
             </div>
 
             <!-- ЭКРАН: ТОВАРЫ -->
@@ -63,10 +63,9 @@
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
-            <!-- ЭКРАН: ДВЕРИ (ВАШИ ССЫЛКИ НА АВИТО) -->
+            <!-- ЭКРАН: ДВЕРИ -->
             <div id="screen-doors" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Двери</h2>
-                
                 <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/vhodnye_dveri_v_kvartiru_8136342838" target="_blank" class="product-card">
                     <img src="https://b00.img.avito.st/image/1/1.QNIq6ba47DscXm42JpwukTxJ7j2USG4tHEXuOZpA5DGc.qH-xerVqDsvkP7rJ4gefmAlcjZntwcuWyYaBAi2z9b0?cqp=2.YN7dHnrK-mhyvtTBpyubvaFoUVdTM3W7BFy5YaeXzZ_Q2glMrBb_s4irqaJhHlfJPgeDGUqVXQ==" alt="Дверь 1" class="product-image">
                     <div class="product-info">
@@ -74,7 +73,6 @@
                         <div class="product-price">23 000 ₽</div>
                     </div>
                 </a>
-
                 <a href="https://www.avito.ru/novosibirsk/remont_i_stroitelstvo/mezhkomnatnye_dveri_8136263055" target="_blank" class="product-card">
                     <img src="https://60.img.avito.st/image/1/1.gBIa0ra4LPssZa72FpjpXQxyLv2kc67tLH4u-ap7JPGs.sBHxE5D0H06lOrixUUiIJtqoybFsUPvNPEw_amPF_zc" alt="Дверь 2" class="product-image">
                     <div class="product-info">
@@ -82,15 +80,31 @@
                         <div class="product-price">7 000 ₽</div>
                     </div>
                 </a>
-
                 <button class="btn back" onclick="showScreen('screen-products')">⬅️ Назад к товарам</button>
             </div>
 
-            <!-- ЭКРАН: УСЛУГИ -->
-            <div id="screen-services" class="screen">
-                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Услуги</h2>
-                <p style="margin-bottom: 15px; color: #666;">Выберите действие:</p>
-                
+            <!-- НОВЫЙ ЭКРАН: О НАС -->
+            <div id="screen-about" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">ℹ️ О компании «Небосвод»</h2>
+                <p class="info-text">Мы работаем на рынке товаров и услуг уже <strong>14 лет</strong>. Предоставляем гарантию качества наших товаров и монтажных работ.</p>
+                <p class="info-text"><strong>Наши адреса:</strong><br>📍 ул. Физкультурная, 20А<br>📍 ул. Н. Островского, 111 к12</p>
+                <a href="https://nebosvod-54.ru" target="_blank" class="btn">🌐 Наш сайт</a>
+                <a href="https://2gis.ru/novosibirsk/firm/70000001006158575" target="_blank" class="btn">📍 Мы в 2ГИС</a>
+                <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
+            </div>
+
+            <!-- НОВЫЙ ЭКРАН: ПРЯМАЯ СВЯЗЬ -->
+            <div id="screen-contacts" class="screen">
+                <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">📞 Прямая связь</h2>
+                <p class="info-text" style="margin-bottom: 15px;">Выберите удобный магазин для связи:</p>
+                <!-- Замените URL на реальные ссылки MAX -->
+                <a href="https://max.ru/..." target="_blank" class="btn">📍 Магазин на ул. Физкультурная 20А</a>
+                <a href="https://max.ru/..." target="_blank" class="btn">📍 Магазин на ул. Н. Островского 111 к12</a>
+                <div style="margin-top: 20px; background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    <p class="info-text" style="margin-bottom: 5px;"><strong>Телефоны:</strong></p>
+                    <p class="info-text">📞 8 (383) 375-91-38</p>
+                    <p class="info-text">📞 8 (383) 375-04-50</p>
+                </div>
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
@@ -98,7 +112,6 @@
             <div id="screen-measure" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">Запись на замер</h2>
                 <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Оставьте свои данные, и мы свяжемся с вами.</p>
-                
                 <form id="measure-form" onsubmit="submitMeasure(event)">
                     <div class="form-group">
                         <label>Ваше имя</label>
@@ -118,7 +131,6 @@
                     </div>
                     <button type="submit" class="btn primary" style="margin-top: 10px;">Отправить заявку</button>
                 </form>
-
                 <button class="btn back" onclick="showScreen('screen-services')">⬅️ Назад к услугам</button>
             </div>
         </div>
@@ -132,15 +144,14 @@
             window.scrollTo(0, 0);
         }
 
-        // ОТПРАВКА ЗАЯВКИ В БОТ ЧЕРЕЗ MAX BRIDGE
         function submitMeasure(event) {
             event.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const type = document.getElementById('service-type').value;
             
-            // Формируем текст команды для бота
-            const messageText = `Заявка на замер: Имя - ${name}, Телефон - ${phone}, Услуга - ${type}`;
+            // ВАЖНО: Добавляем префикс, чтобы бот понял, что это заявка
+            const messageText = `ЗАЯВКА_ИЗ_МИНИ_ПРИЛОЖЕНИЯ: Имя - ${name}, Телефон - ${phone}, Услуга - ${type}`;
 
             try {
                 // Отправляем текст боту
@@ -153,7 +164,6 @@
                 document.getElementById('measure-form').reset();
                 showScreen('screen-main');
             } catch (error) {
-                // Если MAX Bridge не сработал (например, открыли в браузере, а не в MAX)
                 console.error(error);
                 alert("Ошибка отправки. Пожалуйста, убедитесь, что вы находитесь в приложении MAX.");
             }
