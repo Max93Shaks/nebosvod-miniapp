@@ -52,23 +52,17 @@
                     Предоставляем гарантию качества товаров и монтажных работ.
                 </p>
                 <button class="btn" onclick="showScreen('screen-products')">🛒 Товары</button>
-                <!-- Кнопка Услуги теперь открывает экран услуг внутри приложения -->
                 <button class="btn" onclick="showScreen('screen-services')">🛠 Услуги</button>
                 <button class="btn" onclick="showScreen('screen-about')">ℹ️ О нас</button>
                 <button class="btn" onclick="showScreen('screen-contacts')">📞 Прямая связь</button>
             </div>
 
-            <!-- ЭКРАН УСЛУГ (2 КНОПКИ) -->
+            <!-- ЭКРАН УСЛУГ -->
             <div id="screen-services" class="screen">
                 <h2 style="font-size: 18px; margin-bottom: 10px; color: #1a1a2e;">🛠 Услуги</h2>
                 <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Выберите необходимое действие:</p>
-                
-                <!-- Кнопка 1: Расчет монтажа -->
                 <button class="btn" onclick="showScreen('screen-calc')">🧮 Рассчитать монтаж</button>
-                
-                <!-- Кнопка 2: Запись на замер -->
                 <button class="btn" onclick="showScreen('screen-measure')">📏 Записаться на замер</button>
-                
                 <button class="btn back" onclick="showScreen('screen-main')">⬅️ Назад в главное меню</button>
             </div>
 
@@ -191,8 +185,8 @@
             window.scrollTo(0, 0);
         }
 
-        // Универсальная функция для отправки обеих форм
-        function submitForm(event, formType) {
+        // Обновленная функция отправки данных на сервер
+        async function submitForm(event, formType) {
             event.preventDefault();
             
             let messageText = "";
@@ -213,13 +207,27 @@
             }
 
             try {
-                // Отправляем в бот
-                window.WebApp.sendData(messageText);
-                alert(`Заявка отправлена!\nМы свяжемся с вами в ближайшее время.`);
-                showScreen('screen-main');
+                // Отправляем данные на наш сервер через fetch (Вариант 2)
+                const response = await fetch('http://45.154.186.239:8080/api/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        initData: window.WebApp ? window.WebApp.initData : "", // Берем initData, если есть
+                        message: messageText
+                    })
+                });
+
+                if (response.ok) {
+                    alert(`Заявка отправлена!\nМы свяжемся с вами в ближайшее время.`);
+                    showScreen('screen-main');
+                } else {
+                    throw new Error('Ошибка сервера');
+                }
             } catch (error) {
                 console.error(error);
-                alert("Ошибка отправки. Убедитесь, что вы открыли приложение через MAX.");
+                alert("Ошибка отправки. Попробуйте позже.");
             }
         }
     </script>
