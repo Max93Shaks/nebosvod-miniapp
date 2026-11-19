@@ -140,6 +140,14 @@
                             <option value="Потолки">Потолки</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Адрес объекта</label>
+                        <input type="text" id="m-address" required placeholder="ул. Ленина, д. 10, кв. 5">
+                    </div>
+                    <div class="form-group">
+                        <label>Желаемая дата и время</label>
+                        <input type="datetime-local" id="m-date" required>
+                    </div>
                     <button type="submit" class="btn primary" style="margin-top: 10px;">Отправить заявку</button>
                 </form>
                 <button class="btn back" onclick="showScreen('screen-services')">⬅️ Назад к услугам</button>
@@ -165,6 +173,10 @@
                             <option value="Окна">Окна</option>
                             <option value="Потолки">Потолки</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Адрес объекта</label>
+                        <input type="text" id="c-address" required placeholder="ул. Ленина, д. 10, кв. 5">
                     </div>
                     <div class="form-group">
                         <label>Комментарий (площадь, количество)</label>
@@ -222,20 +234,28 @@
         async function submitForm(event, formType) {
             event.preventDefault();
             
-            let messageText = "";
+            let payload = {};
 
             if (formType === 'measure') {
-                const name = document.getElementById('m-name').value;
-                const phone = document.getElementById('m-phone').value;
-                const type = document.getElementById('m-type').value;
-                messageText = `ЗАЯВКА_ИЗ_МИНИ_ПРИЛОЖЕНИЯ: ЗАМЕР | Имя - ${name}, Телефон - ${phone}, Услуга - ${type}`;
+                payload = {
+                    request_type: "Замер",
+                    name: document.getElementById('m-name').value,
+                    phone: document.getElementById('m-phone').value,
+                    service: document.getElementById('m-type').value,
+                    address: document.getElementById('m-address').value,
+                    desired_date: document.getElementById('m-date').value,
+                    comment: ""
+                };
                 document.getElementById('measure-form').reset();
             } else if (formType === 'calc') {
-                const name = document.getElementById('c-name').value;
-                const phone = document.getElementById('c-phone').value;
-                const type = document.getElementById('c-type').value;
-                const comment = document.getElementById('c-comment').value || "нет";
-                messageText = `ЗАЯВКА_ИЗ_МИНИ_ПРИЛОЖЕНИЯ: РАСЧЕТ | Имя - ${name}, Телефон - ${phone}, Услуга - ${type}, Детали - ${comment}`;
+                payload = {
+                    request_type: "Расчет",
+                    name: document.getElementById('c-name').value,
+                    phone: document.getElementById('c-phone').value,
+                    service: document.getElementById('c-type').value,
+                    address: document.getElementById('c-address').value,
+                    comment: document.getElementById('c-comment').value || "нет"
+                };
                 document.getElementById('calc-form').reset();
             }
 
@@ -248,7 +268,7 @@
                     },
                     body: JSON.stringify({
                         initData: window.WebApp ? window.WebApp.initData : "", 
-                        message: messageText
+                        order_data: payload // Отправляем структурированный объект
                     })
                 });
 
