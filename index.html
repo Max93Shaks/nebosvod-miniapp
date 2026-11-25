@@ -494,6 +494,14 @@
     <script src="https://st.max.ru/js/max-web-app.js"></script>
     <script>
       'use strict';
+      // Enable native MAX closing confirmation on every page.
+      try {
+        if (window.WebApp && typeof window.WebApp.enableClosingConfirmation === 'function') {
+          window.WebApp.enableClosingConfirmation();
+        }
+      } catch (err) {
+        console.warn('MAX closing confirmation unavailable', err);
+      }
       // Set window.NEBOSVOD_API_BASE before this script, or leave blank for same-origin /api routes.
       const API = 'https://shstest.ru';
       // Signed MAX launch data; backend must verify it before identifying the customer.
